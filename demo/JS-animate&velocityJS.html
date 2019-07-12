@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JS动画与velocity.js</title>
+	<script type="text/javascript" src="../vue.min.js"></script>
+	<script type="text/javascript" src="../velocity.js"></script>
+	<!-- 可引用 Velocuty.js -->
+</head>
+<body>
+	<div id="root">
+		<transition 
+			name="fade"
+
+			@before-enter="beforeEnter"
+			@enter="enter"
+			@after-enter="afterEnter"
+			
+			
+			@before-leave="beforeLeave"
+			@leave="leave"
+			@after-leave="afterLeave"
+			>
+			<div v-show="show">hello vue</div>
+		</transition>
+		<button @click="handleClick">toggle</button>
+	</div>
+
+	<script type="text/javascript">
+		
+		var vm = new Vue({
+			el: "#root",
+			data: {
+				show: true
+			},
+			methods: {
+				handleClick: function () {
+					this.show = !this.show
+				},
+				beforeEnter: function (el) {
+					el.style.color = "red"
+				},
+				enter: function (el, done) {
+					setTimeout(() => {
+						el.style.color = 'green'
+					}, 2000)
+					setTimeout(() => {
+						done() /* 手动调用，表示动画执行完毕 */
+					}, 4000)
+				},
+				afterEnter: function (el) {
+					el.style.color = '#000'
+				},
+				beforeLeave: function (el) {
+					el.style.opacity = 1;
+				},
+				leave: function (el, done) {
+					/* 引用 Velocity.js 的写法 */
+					Velocity(el, {opacity: 0}, {duration: 1000,complete: done})
+				},
+				afterLeave: function (el) {
+					alert('动画结束')
+				}
+			}
+		});
+	</script>
+</body>
+</html>
