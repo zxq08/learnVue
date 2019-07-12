@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.t-table{
+			width: 200px;
+		}
+		.t-td,
+		.t-td ~td
+		{
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<table  class="t-table" border="1px solid #000" cellpadding="0" cellspacing="0">
+			<thead>
+				<th>first</th>
+				<th>second</th>
+				<th>third</th>
+				<th>fourth</th>
+			</thead>
+			<tr>
+				<td rowspan="3">1</td>
+				<td class="t-td">2</td>
+				<td>3</td>
+				<td>4</td>
+			</tr>
+			<tr>
+				<td class="t-td">5</td>
+				<td>6</td>
+				<td>7</td>
+			</tr>
+			<tr>
+				<td class="t-td">8</td>
+				<td>9</td>
+				<td>10</td>
+			</tr>
+			<tr>
+				<td>11</td>
+				<td class="t-td">12</td>
+				<td>13</td>
+				<td>14</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

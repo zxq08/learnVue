@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>多个元素或组件的过渡</title>
+	<script type="text/javascript" src="../vue.min.js"></script>
+	<style type="text/css">
+	.v-enter, .v-leave-to{
+		opacity: 0;
+	}	
+	.v-enter-active, 
+	.v-leave-active{
+		transition: opacity 3s;
+	}
+	</style>
+</head>
+<body>
+	<div id="root">
+	
+	<!-- 多个元素 -->
+	<p>多个元素过渡动画：</p>
+		<transition mode="out-in"> <!-- 先隐藏，再显示 -->
+			<!-- 由于vue会复用元素，需要添加key -->
+			<div v-if="show" key="hello">hello vue</div>
+			<div v-else key="bye">Bye Vue</div>
+		</transition>
+		<button @click="handleClick">toggle</button>
+
+	<!-- 组件 -->
+	<p>组件过渡动画：</p>
+		<transition mode="out-in"> <!-- 先隐藏，再显示 -->
+			<child v-if="showon" key="hello1"></child>
+			<child-one v-else key="bye1"></child-one>
+		</transition>
+		<button @click="handleChange">change</button>
+
+	<!-- 动态组件 -->
+	<p>动态组件过渡动画：</p>	
+		<transition mode="out-in"> <!-- 先隐藏，再显示 -->
+			<component :is="type"></component>
+		</transition>
+		<button @click="onChange">onChange</button>
+	</div>
+
+	<script type="text/javascript">
+		
+		Vue.component('child', {
+			template: "<div>child</div>"
+		});
+
+		Vue.component('child-one', {
+			template: "<div>child-one</div>"
+		});
+
+		var vm = new Vue({
+			el: "#root",
+			data: {
+				show: true,
+				showon: true,
+				type: 'child'
+			},
+			methods: {
+				handleClick: function () {
+					this.show = !this.show
+				},
+				handleChange: function () {
+					this.showon = !this.showon;
+				},
+				onChange: function () {
+					this.type = this.type === 'child' ? 'child-one' : 'child';
+				},
+			}
+		});
+	</script>
+</body>
+</html>
