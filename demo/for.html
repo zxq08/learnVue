@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>for</title>
+	<script type="text/javascript" src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- 对象循环 -->
+		<!-- 对象和数组 只能通过 Vue.set()/vm.$set() 方法或者重新复制来改变页面 -->
+		<!-- 数组还可以通过 push pop shift unshift splice sort reverse -->
+		<div v-for="item in userInfo">{{item}}
+			
+		</div>
+
+		<!-- 数组循环 -->
+		<ul>
+			<!-- template占位符不会加载到dom节点中 -->
+			<template v-for="(item,index) in list" :key="item.id">
+				<li >{{item.text}}</li>
+				<span>
+					{{index}}
+				</span>
+			</template>
+		</ul>
+	</div>
+	<script type="text/javascript">
+
+		/*
+		 * 通过下标修改数组中的值不会影响页面
+		 * 只有使用以下方法才能影响页面
+
+		 push pop shift unshift splice sort reverse
+
+		 或者复制为新的数组，即修改引用类型的引用，对象也是如此
+		 */
+
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				userInfo: {
+					name: "zxq",
+					age: 24,
+					gender: "male",
+					salary: "secret"
+				},
+				list: [
+					{
+						id: '01',
+						text: 'hello'
+					},
+					{
+						id: '02',
+						text: 'hello world'
+					},
+					{
+						id: '03',
+						text: 'hello vue'
+					}
+				]
+			}
+		});
+	</script>
+</body>
+</html>
